@@ -21,7 +21,6 @@
 # Guild / Clan System (if possible I guess)
 
 import random
-import uuid
 
 import pandas
 
