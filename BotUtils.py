@@ -36,7 +36,7 @@ class Serverinf:
 
     def Init_DF(self):
         try:
-            f = open("UserData.parquet")
+            open("UserData.parquet")
         except FileNotFoundError:
             data = {
                 "Session_ID": [],
@@ -91,7 +91,7 @@ class Serverinf:
             Inv[name] = str(value)
         return {"Message": "All Items in Inventory", "Data": Inv}
 
-    def Display_Money(self):
+    def Display_Money(self, Email):
         return {
             "Message": "List of all Items",
             "Data": str(self.df.loc[Email]["Money"]),
