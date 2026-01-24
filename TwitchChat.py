@@ -21,7 +21,7 @@ chain = prompt | model
 
 def handle_conversation():
     context = ""
-    print("wilcome")
+    print("welcome")
     while True:
         user_input = input("UserChat: ")
         if user_input.lower() == "exit":
