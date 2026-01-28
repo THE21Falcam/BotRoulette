@@ -12,7 +12,7 @@ server = "irc.chat.twitch.tv"
 port = 6667
 nickname = "justinfan30469"
 token = "oauth:SCHMOOPIIE"  # Default Token
-channel = "#jynxzi"
+channel = "#revotopia"
 
 # Initialize Socket
 sock = socket.socket()

@@ -14,14 +14,18 @@
 
 # Pygame Video Data To Flie
 import time
+from configparser import ConfigParser
 
 import av
 import numpy as np
 import pygame
 
+config = ConfigParser()
+config.read("Config.ini")
+
 WIDTH, HEIGHT = 1280, 720
 FPS = 60
-STREAM_KEY = "your_stream_key_here"
+STREAM_KEY = config["STREAM"]["STREAM_KEY"]
 
 output = av.open(f"rtmp://live.twitch.tv/app/{STREAM_KEY}", mode="w", format="flv")
 
@@ -66,22 +70,22 @@ while True:
         output.mux(packet)
 
     # --- AUDIO (silent) ---
-    samples = np.zeros((1024, 2), dtype=np.float32)
-    audio_frame = av.AudioFrame.from_ndarray(samples, format="flt", layout="stereo")
-    audio_frame.sample_rate = 44100
-    audio_frame.pts = audio_pts
-    audio_pts += audio_frame.samples
+    # samples = np.zeros((1, 2), dtype=np.float32)
+    # audio_frame = av.AudioFrame.from_ndarray(samples, format="flt", layout="stereo")
+    # audio_frame.sample_rate = 44100
+    # audio_frame.pts = audio_pts
+    # audio_pts += audio_frame.samples
 
-    for packet in audio_stream.encode(audio_frame):
-        output.mux(packet)
+    # for packet in audio_stream.encode(audio_frame):
+    #     output.mux(packet)
 
     clock.tick(FPS)
 
 for packet in video_stream.encode():
     output.mux(packet)
 
-for packet in audio_stream.encode():
-    output.mux(packet)
+# for packet in audio_stream.encode():
+#     output.mux(packet)
 
 output.close()
 pygame.quit()
