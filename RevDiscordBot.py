@@ -1,13 +1,13 @@
+# config["CLIENT"] = {"Sesson_ID": str(LoginDataSD['Data'])}
+# SessionID = config["CLIENT"]["Sesson_ID"]
+
 from configparser import ConfigParser
 
 import discord
 from discord.ext import commands
 
 config = ConfigParser()
-config.read("ClientConfig.ini")
-
-# config["CLIENT"] = {"Sesson_ID": str(LoginDataSD['Data'])}
-# SessionID = config["CLIENT"]["Sesson_ID"]
+config.read("Config.ini")
 
 bot = commands.Bot(command_prefix="?", intents=discord.Intents.all())
 
@@ -39,4 +39,4 @@ async def Help(interaction: discord.Interaction):
 
 # HELP Command Ends
 
-bot.run("TOKEN")
+bot.run(config["DISCORD"]["TOKEN"])

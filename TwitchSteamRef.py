@@ -3,15 +3,6 @@
 # rtmp://<ingest-server>/app/<stream-key>[?bandwidthtest=true]
 # https://trac.ffmpeg.org/wiki/EncodingForStreamingSites
 
-# FLV File Format
-
-# STREAM_KEY = "STREAM_KEY"  # <-- Replace this
-# TWITCH_URL = "TWITCH_URL"
-# WIDTH, HEIGHT = 640, 480
-# FRAME_RATE = 30
-# SAMPLE_RATE = 44100
-# AUDIO_CHANNELS = 2
-
 # Pygame Video Data To Flie
 import time
 from configparser import ConfigParser
@@ -26,8 +17,8 @@ config.read("Config.ini")
 WIDTH, HEIGHT = 1280, 720
 FPS = 60
 STREAM_KEY = config["STREAM"]["STREAM_KEY"]
-
-output = av.open(f"rtmp://live.twitch.tv/app/{STREAM_KEY}", mode="w", format="flv")
+TWITCH_URL = config["STREAM"]["TWITCH_URL"]
+output = av.open(f"{TWITCH_URL}{STREAM_KEY}", mode="w", format="flv")
 
 video_stream = output.add_stream("libx264", rate=FPS)
 video_stream.width = WIDTH
@@ -70,22 +61,22 @@ while True:
         output.mux(packet)
 
     # --- AUDIO (silent) ---
-    # samples = np.zeros((1, 2), dtype=np.float32)
-    # audio_frame = av.AudioFrame.from_ndarray(samples, format="flt", layout="stereo")
-    # audio_frame.sample_rate = 44100
-    # audio_frame.pts = audio_pts
-    # audio_pts += audio_frame.samples
+    samples = np.zeros((2, 1024), dtype=np.float32)
+    audio_frame = av.AudioFrame.from_ndarray(samples, format="flt", layout="stereo")
+    audio_frame.sample_rate = 44100
+    audio_frame.pts = audio_pts
+    audio_pts += audio_frame.samples
 
-    # for packet in audio_stream.encode(audio_frame):
-    #     output.mux(packet)
+    for packet in audio_stream.encode(audio_frame):
+        output.mux(packet)
 
     clock.tick(FPS)
 
 for packet in video_stream.encode():
     output.mux(packet)
 
-# for packet in audio_stream.encode():
-#     output.mux(packet)
+for packet in audio_stream.encode():
+    output.mux(packet)
 
 output.close()
 pygame.quit()
