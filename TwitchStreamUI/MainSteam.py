@@ -4,12 +4,16 @@
 # https://trac.ffmpeg.org/wiki/EncodingForStreamingSites
 
 # Pygame Video Data To Flie
+
+import os.path
 import time
 from configparser import ConfigParser
 
 import av
 import numpy as np
 import pygame
+
+filepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../Config.ini")
 
 config = ConfigParser()
 config.read("Config.ini")

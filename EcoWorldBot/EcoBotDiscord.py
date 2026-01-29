@@ -1,13 +1,16 @@
 # config["CLIENT"] = {"Sesson_ID": str(LoginDataSD['Data'])}
 # SessionID = config["CLIENT"]["Sesson_ID"]
 
+import os.path
 from configparser import ConfigParser
 
 import discord
 from discord.ext import commands
 
+filepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../Config.ini")
+
 config = ConfigParser()
-config.read("Config.ini")
+config.read(filepath)
 
 bot = commands.Bot(command_prefix="?", intents=discord.Intents.all())
 
@@ -28,15 +31,10 @@ async def Profile(interaction: discord.Interaction):
     await interaction.response.send_message(f"Your User ID is {interaction.user.id}")
 
 
-# PROFILE Command End
-
-
 # HELP Command Start
 @bot.tree.command(name="help", description="Helps With The Command")
 async def Help(interaction: discord.Interaction):
     pass
 
-
-# HELP Command Ends
 
 bot.run(config["DISCORD"]["TOKEN"])

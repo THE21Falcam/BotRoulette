@@ -4,6 +4,7 @@
 # PASS SCHMOOPIIE
 # NICK justinfan30469
 # JOIN #revotopia
+# :mrfalcam21!mrfalcam21@mrfalcam21.tmi.twitch.tv PRIVMSG #revotopia :Hello
 
 import socket
 
@@ -12,7 +13,7 @@ server = "irc.chat.twitch.tv"
 port = 6667
 nickname = "justinfan30469"
 token = "oauth:SCHMOOPIIE"  # Default Token
-channel = "#revotopia"
+channel = "#marlon"
 
 # Initialize Socket
 sock = socket.socket()
@@ -29,5 +30,11 @@ while True:
     if resp.startswith("PING"):
         sock.send("PONG\n".encode("utf-8"))
     elif len(resp) > 0 and "justinfan30469" not in resp:
-        print(resp)
+        prefix, command, channel, message = resp.split(" ", 3)
+
+        username = prefix.split("!", 1)[0][1:]
+        message = message[1:]
+
+        print(username)  # mrfalcam21
+        print(message)
         # Parse logic here for user and message

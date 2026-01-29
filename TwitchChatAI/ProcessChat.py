@@ -1,6 +1,3 @@
-# gemma3:270m
-# 32k context window
-
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_ollama import OllamaLLM
 
