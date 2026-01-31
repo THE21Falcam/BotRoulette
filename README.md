@@ -1,2 +1,3 @@
 # BotRoulette
-MMO Text Based Adventure Game Similar to OWO, Dank Memer Discord Bot With a GUI for 24/7 Stream on Twitch
+ - MMO RPG Game With a GUI and A CLI Version.
+ - It Includes a 24/7 Twitch Stream That Will Broadcast Which Stream Info About The MMO World Like a News Letter and New Event Early Access and also Interacts With the Twitch Chat. 
