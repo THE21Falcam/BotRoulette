@@ -16,7 +16,7 @@ import pygame
 filepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../Config.ini")
 
 config = ConfigParser()
-config.read("Config.ini")
+config.read(filepath)
 
 WIDTH, HEIGHT = 1280, 720
 FPS = 60
@@ -36,15 +36,23 @@ video_stream.options = {
 }
 
 audio_stream = output.add_stream("aac", rate=44100)
-# audio_stream.channels = 2
 audio_stream.layout = "stereo"
-
+pygame.mixer.pre_init(
+    frequency=44100,
+    size=-16,  # 16-bit signed
+    channels=2,
+    buffer=1024,
+)
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 
 start_time = time.time()
-audio_pts = 0
+
+AUDIO_PTS = 0
+SAMPLE_RATE = 44100
+CHANNELS = 2
+FRAME_SAMPLES = 1024
 
 while True:
     for event in pygame.event.get():
@@ -65,14 +73,19 @@ while True:
         output.mux(packet)
 
     # --- AUDIO (silent) ---
+    # sound = pygame.mixer.Sound("music.wav")  # WAV recommended
+    # raw = pygame.sndarray.array(sound)
+
     samples = np.zeros((2, 1024), dtype=np.float32)
-    audio_frame = av.AudioFrame.from_ndarray(samples, format="flt", layout="stereo")
+    audio_frame = av.AudioFrame.from_ndarray(samples, format="fltp", layout="stereo")
     audio_frame.sample_rate = 44100
-    audio_frame.pts = audio_pts
-    audio_pts += audio_frame.samples
+    audio_frame.pts = AUDIO_PTS
+    AUDIO_PTS += audio_frame.samples
 
     for packet in audio_stream.encode(audio_frame):
         output.mux(packet)
+
+    pygame.display.flip()
 
     clock.tick(FPS)
 
