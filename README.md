@@ -10,5 +10,7 @@
  - [**RevoTopia**](www.twitch.tv/revotopia) Live Stream Will be Run By a AI Bot I Will Not Interact With It Unless any Fault Occurs In the Bot
  - If you Want to Watch Me Play stuff or Do Somthing Checkout [**MrFalcam21**](https://www.twitch.tv/mrfalcam21)
  - Join My [**Discord**](https://discord.gg/cXF5eBKK5D) to Have Fun
+# Features to be Included
+ - AI Bot
 # Personal Notes to Add Features (Will Remove this Section In Readme After Implementing these Features)
  - Stream Background Will Have A Custom Day Light Cycle Accouding to The MMO RPG Day Night Cycle
