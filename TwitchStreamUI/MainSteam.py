@@ -73,11 +73,9 @@ while True:
         output.mux(packet)
 
     # --- AUDIO (silent) ---
-    # sound = pygame.mixer.Sound("music.wav")  # WAV recommended
-    # raw = pygame.sndarray.array(sound)
-
-    samples = np.zeros((2, 1024), dtype=np.float32)
-    audio_frame = av.AudioFrame.from_ndarray(samples, format="fltp", layout="stereo")
+    sound = pygame.mixer.Sound("music.wav")  # WAV recommended
+    raw = pygame.sndarray.array(sound)
+    audio_frame = av.AudioFrame.from_ndarray(raw, format="fltp", layout="stereo")
     audio_frame.sample_rate = 44100
     audio_frame.pts = AUDIO_PTS
     AUDIO_PTS += audio_frame.samples
