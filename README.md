@@ -8,6 +8,7 @@
 # KeyNotes
  - Expect the Gameplay of the MMO Similar to the offline Version of [**Dungeon-Madness**](https://github.com/THE21Falcam/Dungeon-Madness) So if you want to See What the MMO Will Become Follow This Project
  - Code for the Live 24/7 Stream Part Sits on [**MasterLiveStream**](https://github.com/THE21Falcam/MasterLiveStream) Repositories
+ - A CLI Version of the RPG Game Sits in [**MadnessCLI**](https://github.com/THE21Falcam/MadnessCLI) Repositories
  - [**RevoTopia**](www.twitch.tv/revotopia) Live Stream Will be Run By a AI Bot I Will Not Interact With It Unless any Fault Occurs In the Bot
  - If you Want to Watch Me Play stuff or Do Somthing Checkout [**MrFalcam21**](https://www.twitch.tv/mrfalcam21)
  - Join My [**Discord**](https://discord.gg/cXF5eBKK5D) to Have Fun
